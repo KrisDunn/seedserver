@@ -11,6 +11,14 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ${MOUNT_POINT}/app_data/portainer:/data
+  
+  watchtower:
+    container_name: watchtower
+    restart: always
+    image: v2tec/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --schedule "0 0 23 * * SUN " --cleanup
 
   heimdall:
     image: linuxserver/heimdall
@@ -128,3 +136,4 @@ services:
       - ${MOUNT_POINT}/app_data/bazarr:/config
       - ${MOUNT_POINT}/movies:/movies
       - ${MOUNT_POINT}/tv:/tv
+
