@@ -1,0 +1,130 @@
+version: "2.1"
+
+services:
+  portainer:
+    image: portainer/portainer
+    container_name: portainer
+    restart: always
+    command: -H unix:///var/run/docker.sock
+    ports:
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${MOUNT_POINT}/app_data/portainer:/data
+
+  heimdall:
+    image: linuxserver/heimdall
+    container_name: heimdall
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${MOUNT_POINT}/app_data/heimdall:/config
+
+  transmission:
+    image: haugene/transmission-openvpn
+    container_name: transmission-openvpn
+    restart: always
+    cap_add:
+      - NET_ADMIN
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
+    ports:
+      - "9001:9091"
+      - "9002:9117"
+      - "51413:51413"
+    environment:
+      - OPENVPN_PROVIDER=${VPN_PROVIDER}
+      - OPENVPN_CONFIG=${VPN_CONFIG}
+      - OPENVPN_USERNAME=${VPN_USERNAME}
+      - OPENVPN_PASSWORD=${VPN_PASSWORD}
+      - OPENVPN_OPTS=--inactive 3600 --ping 10 --ping-exit 60
+      - CREATE_TUN_DEVICE=true
+      - LOCAL_NETWORK=192.168.0.0/24
+      - TRANSMISSION_RPC_AUTHENTICATION_REQUIRED=true
+      - TRANSMISSION_RPC_HOST_WHITELIST="127.0.0.1,192.168.*.*"
+      - TRANSMISSION_RPC_USERNAME=${TRANSMISSION_USERNAME}
+      - TRANSMISSION_RPC_PASSWORD=${TRANSMISSION_PASSWORD}
+      - TRANSMISSION_UMASK=0
+      - TRANSMISSION_RATIO_LIMIT_ENABLED=true
+      - TRANSMISSION_RATIO_LIMIT=0
+      - TRANSMISSION_DOWNLOAD_DIR=/downloads
+      - TRANSMISSION_INCOMPLETE_DIR=/incomplete
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${MOUNT_POINT}/app_data/transmission:/data
+      - ${MOUNT_POINT}/app_data/downloads/completed:/downloads
+      - ${MOUNT_POINT}/app_data/downloads/incomplete:/incomplete
+      - /etc/localtime:/etc/localtime:ro
+  
+  jackett:
+    image: "linuxserver/jackett"
+    container_name: jackett
+    restart: always
+    network_mode: "container:transmission-openvpn"
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${MOUNT_POINT}/app_data/jackett:/config
+      - ${MOUNT_POINT}/app_data/jackett:/data
+    # - /etc/localtime:/etc/localtime:ro
+  
+  radarr:
+    image: "linuxserver/radarr"
+    container_name: radarr
+    restart: always
+    ports:
+      - "9003:7878"
+    environment: 
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - UMASK_SET=0
+    volumes:
+      - ${MOUNT_POINT}/app_data/radarr:/config
+      - ${MOUNT_POINT}/app_data/downloads/completed:/downloads
+      - ${MOUNT_POINT}/movies:/movies
+    # - /etc/localtime:/etc/localtime:ro
+  
+  sonarr:
+    image: "linuxserver/sonarr"
+    container_name: sonarr
+    restart: always
+    ports:
+      - "9004:8989"
+    environment: 
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - UMASK_SET=0
+    volumes:
+      - ${MOUNT_POINT}/app_data/sonarr:/config
+      - ${MOUNT_POINT}/app_data/downloads/completed:/downloads
+      - ${MOUNT_POINT}/tv:/tv
+    # - /etc/localtime:/etc/localtime:ro
+
+  bazarr:
+    image: linuxserver/bazarr
+    container_name: bazarr
+    restart: always
+    ports:
+      - 9005:6767
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - UMASK_SET=0
+    volumes:
+      - ${MOUNT_POINT}/app_data/bazarr:/config
+      - ${MOUNT_POINT}/movies:/movies
+      - ${MOUNT_POINT}/tv:/tv
