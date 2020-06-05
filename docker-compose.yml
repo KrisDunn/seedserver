@@ -85,7 +85,6 @@ services:
     volumes:
       - ${MOUNT_POINT}/app_data/jackett:/config
       - ${MOUNT_POINT}/app_data/jackett:/data
-    # - /etc/localtime:/etc/localtime:ro
   
   radarr:
     image: "linuxserver/radarr"
@@ -102,7 +101,6 @@ services:
       - ${MOUNT_POINT}/app_data/radarr:/config
       - ${MOUNT_POINT}/app_data/downloads/completed:/downloads
       - ${MOUNT_POINT}/movies:/movies
-    # - /etc/localtime:/etc/localtime:ro
   
   sonarr:
     image: "linuxserver/sonarr"
@@ -119,7 +117,6 @@ services:
       - ${MOUNT_POINT}/app_data/sonarr:/config
       - ${MOUNT_POINT}/app_data/downloads/completed:/downloads
       - ${MOUNT_POINT}/tv:/tv
-    # - /etc/localtime:/etc/localtime:ro
 
   bazarr:
     image: linuxserver/bazarr
