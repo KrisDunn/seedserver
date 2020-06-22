@@ -101,7 +101,7 @@ services:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
-      - RUN_OPTS=ProxyConnection=${HOST}:8888 # comment out this line to disable routing jackett through the OpenVPN proxy [transmission-openvpn]
+    # - RUN_OPTS=ProxyConnection=${HOST}:8888 # uncomment this line to enable routing jackett through the OpenVPN proxy [transmission-openvpn] - can cause tracker issues
     volumes:
       - ${CONFIG_POINT}/app_data/jackett:/config
       - ${CONFIG_POINT}/app_data/jackett:/data
