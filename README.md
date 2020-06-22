@@ -68,13 +68,13 @@ Applications can be accessed from the host IP uisng the ports listed:
 
 | Application  | Port |
 |--------------|------|
-| Heimdall     | 80   |
-| Portainer    | 9000 |
-| Transmission | 9001 |
-| Jackett      | 9002 |
-| Radarr       | 9003 |
-| Sonarr       | 9004 |
-| Bazarr       | 9005 |
+| heimdall     | 80   |
+| portainer    | 9000 |
+| transmission | 9001 |
+| jackett      | 9002 |
+| radarr       | 9003 |
+| sonarr       | 9004 |
+| bazarr       | 9005 |
 
 ## Notes
 While the quickstart guide will bring up the environment quickly, there are many more options available in the images which can be used to better suit your environment.
