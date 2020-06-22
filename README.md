@@ -17,9 +17,11 @@ To get started with Seedserver follow the quickstart guide below. For more detai
 In order to follow this guide docker and docker-compose must be installed on your host. The following host operating systems have been tested:
 
 * Ubuntu Server 20.04
-* MacOS 10.13 or above
+* MacOS(1) 10.13 or above
 
 In addition, a VPN service is required. Refer to the haugene/transmission [documentation](https://haugene.github.io/docker-transmission-openvpn/) for supported providers and options. 
+
+(1) To use Docker-Desktop remember to share the root folders (MOUNT_POINT and CONFIG_POINT) in preferences > resources > file sharing. 
 
 ### Modify the .ENV file
 The .ENV contains variables used in the docker-compose.yaml file. Modify the .ENV file to reflect your local environment.
