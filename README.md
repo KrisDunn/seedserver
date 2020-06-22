@@ -83,5 +83,5 @@ While the quickstart guide will bring up the environment quickly, there are many
 ```bash
 - RUN_OPTS=ProxyConnection=${HOST}:8888
 ```
-This variable will proxy the jackett container through the TinyProxy running in the transmission-openvpn container. Many UK ISPs block access to trackers so this allows connections to be made over VPN. There are notable issues with some trackers which prevent this from being a viable solution. It is better to configure proxy settings directly within jackett. This setting has been left for those that need it. 
+This variable will proxy the jackett container through the tinyproxy running in the transmission-openvpn container. Many UK ISPs block access to trackers so this allows connections to be made over VPN. There are notable issues with some trackers which prevent this from being a viable solution. It is better to configure proxy settings directly within jackett. This variable has been left for those that need it. 
 
