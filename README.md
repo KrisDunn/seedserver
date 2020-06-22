@@ -64,14 +64,17 @@ Run the docker compose command to bring up the environment:
 docker-compose up -d
 ```
 
-Applications can be accessed from the host IP:[port] 
-[port: 80  ] heimdall
-[port: 9000] portainer
-[port: 9001] transmission VPN
-[port: 9002] jackett
-[port: 9003] radarr
-[port: 9004] sonarr
-[port: 9005] bazarr
+Applications can be accessed from the host IP uisng the ports listed:
+
+| Application  | Port |
+|--------------|------|
+| Heimdall     | 80   |
+| Portainer    | 9000 |
+| Transmission | 9001 |
+| Jackett      | 9002 |
+| Radarr       | 9003 |
+| Sonarr       | 9004 |
+| Bazarr       | 9005 |
 
 ## Notes
 While the quickstart guide will bring up the environment quickly, there are many more options available in the images which can be used to better suit your environment.
