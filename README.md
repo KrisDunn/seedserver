@@ -30,6 +30,7 @@ The .ENV contains variables used in the docker-compose.yaml file. Modify the .EN
 The variables below are available in the .ENV file. 
 ```bash
 HOST=[host_ip]
+LOCAL_NETWORK=[local_network] #Use CIDR i.e. 192.168.1.0/24
 MOUNT_POINT=[seedserver_path]
 CONFIG_POINT=[docker_home]
 VPN_PROVIDER=[provider_name]
