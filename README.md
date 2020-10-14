@@ -47,6 +47,7 @@ TZ=/etc/localtime:/etc/localtime:ro
 #### ENV example file
 ```bash
 HOST=192.168.0.10
+LOCAL_NETWORK=192.168.0.0/24
 MOUNT_POINT=/mnt/external_drive
 CONFIG_POINT=~/docker
 VPN_PROVIDER=IPVANISH
