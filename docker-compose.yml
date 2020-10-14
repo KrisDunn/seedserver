@@ -39,7 +39,7 @@ services:
       - ${CONFIG_POINT}/app_data/heimdall:/config
 
   portainer:
-    image: portainer/portainer
+    image: portainer/portainer-ce
     container_name: portainer
     restart: always
     command: -H unix:///var/run/docker.sock
